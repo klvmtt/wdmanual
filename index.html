@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Auto -6500</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .box {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* HILANGKAN PANAH INPUT NUMBER */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+
+  input {
+    width: 110px;
+    padding: 6px;
+    font-size: 14px;
+    text-align: right;
+  }
+
+  .result {
+    width: 110px;
+    padding: 6px;
+    background: #222;
+    border: 1px solid #555;
+    text-align: right;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .result:hover {
+    background: #2e7d32;
+  }
+
+  .copied {
+    font-size: 11px;
+    color: #4caf50;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="box">
+    <input type="number" id="inputJumlah" placeholder="Jumlah">
+    <div class="result" id="hasil">0</div>
+  </div>
+  <div class="copied" id="copiedText">Tersalin ✔</div>
+</div>
+
+<script>
+  const input = document.getElementById("inputJumlah");
+  const hasil = document.getElementById("hasil");
+  const copiedText = document.getElementById("copiedText");
+
+  input.addEventListener("input", () => {
+    const val = parseInt(input.value) || 0;
+    hasil.textContent = val - 6500;
+  });
+
+  hasil.addEventListener("click", () => {
+    navigator.clipboard.writeText(hasil.textContent);
+    copiedText.style.display = "block";
+    setTimeout(() => copiedText.style.display = "none", 1000);
+  });
+</script>
+
+</body>
+</html>
