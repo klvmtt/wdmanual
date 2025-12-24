@@ -20,7 +20,7 @@
     align-items: center;
   }
 
-  /* HILANGKAN PANAH INPUT NUMBER */
+  /* Hilangkan panah naik-turun */
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -28,7 +28,7 @@
   }
 
   input[type=number] {
-    -moz-appearance: textfield; /* Firefox */
+    -moz-appearance: textfield;
   }
 
   input {
@@ -56,6 +56,8 @@
     font-size: 11px;
     color: #4caf50;
     display: none;
+    margin-top: 4px;
+    text-align: center;
   }
 </style>
 </head>
@@ -63,7 +65,7 @@
 
 <div>
   <div class="box">
-    <input type="number" id="inputJumlah" placeholder="Jumlah">
+    <input type="number" id="inputJumlah" placeholder="Jumlah" autofocus>
     <div class="result" id="hasil">0</div>
   </div>
   <div class="copied" id="copiedText">Tersalin ✔</div>
@@ -81,8 +83,14 @@
 
   hasil.addEventListener("click", () => {
     navigator.clipboard.writeText(hasil.textContent);
+
     copiedText.style.display = "block";
     setTimeout(() => copiedText.style.display = "none", 1000);
+
+    // AUTO CLEAR & SIAP INPUT BARU
+    input.value = "";
+    hasil.textContent = "0";
+    input.focus();
   });
 </script>
 
