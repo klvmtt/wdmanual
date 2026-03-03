@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Auto -6500</title>
+<title>Auto Minus</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -14,13 +14,24 @@
     height: 100vh;
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .box {
     display: flex;
     gap: 8px;
     align-items: center;
   }
 
-  /* Hilangkan panah naik-turun */
+  label {
+    font-size: 12px;
+    color: #bbb;
+    width: 80px;
+  }
+
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -56,42 +67,62 @@
     font-size: 11px;
     color: #4caf50;
     display: none;
-    margin-top: 4px;
     text-align: center;
   }
 </style>
 </head>
 <body>
 
-<div>
-  <div class="box">
-    <input type="number" id="inputJumlah" placeholder="Jumlah" autofocus>
-    <div class="result" id="hasil">0</div>
+<div class="container">
+
+  <!-- AUTO -2500 -->
+  <div>
+    <div class="box">
+      <label>-2500</label>
+      <input type="number" id="input2500" placeholder="Jumlah">
+      <div class="result" id="hasil2500">0</div>
+    </div>
+    <div class="copied" id="copied2500">Tersalin ✔</div>
   </div>
-  <div class="copied" id="copiedText">Tersalin ✔</div>
+
+  <!-- AUTO -6500 (FITUR LAMA) -->
+  <div>
+    <div class="box">
+      <label>-6500</label>
+      <input type="number" id="input6500" placeholder="Jumlah" autofocus>
+      <div class="result" id="hasil6500">0</div>
+    </div>
+    <div class="copied" id="copied6500">Tersalin ✔</div>
+  </div>
+
 </div>
 
 <script>
-  const input = document.getElementById("inputJumlah");
-  const hasil = document.getElementById("hasil");
-  const copiedText = document.getElementById("copiedText");
+  function setupAutoMinus(inputId, hasilId, copiedId, minusValue) {
+    const input = document.getElementById(inputId);
+    const hasil = document.getElementById(hasilId);
+    const copiedText = document.getElementById(copiedId);
 
-  input.addEventListener("input", () => {
-    const val = parseInt(input.value) || 0;
-    hasil.textContent = val - 6500;
-  });
+    input.addEventListener("input", () => {
+      const val = parseInt(input.value) || 0;
+      hasil.textContent = val - minusValue;
+    });
 
-  hasil.addEventListener("click", () => {
-    navigator.clipboard.writeText(hasil.textContent);
+    hasil.addEventListener("click", () => {
+      navigator.clipboard.writeText(hasil.textContent);
 
-    copiedText.style.display = "block";
-    setTimeout(() => copiedText.style.display = "none", 1000);
+      copiedText.style.display = "block";
+      setTimeout(() => copiedText.style.display = "none", 1000);
 
-    // AUTO CLEAR & SIAP INPUT BARU
-    input.value = "";
-    hasil.textContent = "0";
-    input.focus();
-  });
+      input.value = "";
+      hasil.textContent = "0";
+      input.focus();
+    });
+  }
+
+  // Setup masing-masing
+  setupAutoMinus("input2500", "hasil2500", "copied2500", 2500);
+  setupAutoMinus("input6500", "hasil6500", "copied6500", 6500);
 </script>
 
 </body>
